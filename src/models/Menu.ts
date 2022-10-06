@@ -5,4 +5,16 @@ export default class Menu {
 	title?: string;
 	description?: string;
 	items?: Array<MenuItem>;
+
+	constructor(
+		id?: number,
+		title?: string,
+		description?: string,
+		items: Array<MenuItem> = []
+	) {
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.items = items;
+	}
 }
