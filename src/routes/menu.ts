@@ -26,14 +26,16 @@ router.get('/:menuId', async (req, res) => {
 	}
 });
 
-router.post('/', async (req, res) => {
+router.post('/:menuId?', async (req, res) => {
 	const menuGateway = req.container.getMenuGateway();
+	const id = req.params["menuId"] ? parseInt(req.params["menuId"]) : undefined;
 	const menu = new Menu(
-		undefined,
+		id,
 		req.body["title"],
 		req.body["description"]
 	);
-	menuGateway.add(menu);
+
+	await menuGateway.save(menu);
 	res.redirect("/menu");
 });
 

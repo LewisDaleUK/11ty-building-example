@@ -35,4 +35,12 @@ export default class MenuItemGateway implements IMenuItemGateway {
 		const rows = await this._database.all("SELECT * FROM menu_items");
 		return rows.map(row => this.row_to_menu_item(row) as MenuItem);
 	}
+
+	async save(item: MenuItem): Promise<void> {
+		
+	}
+
+	async update(item: MenuItem): Promise<void> {
+		
+	}
 }

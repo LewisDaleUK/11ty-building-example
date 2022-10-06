@@ -42,4 +42,21 @@ export default class MenuGateway implements IMenuGateway {
 	async add(menu: Menu): Promise<void> {
 		await this._database.run("INSERT INTO menus (title, description) VALUES (?, ?)", menu.title, menu.description);
 	}
+
+	async save(item: Menu): Promise<void> {
+		if (!item.id) {
+			await this.add(item);
+		} else {
+			await this.update(item);
+		}
+	}
+
+	async update(item: Menu): Promise<void> {
+		await this._database.run(
+			"UPDATE menus SET title = ?, description = ? WHERE id = ?",
+			item.title,
+			item.description,
+			item.id
+		);
+	}
 }

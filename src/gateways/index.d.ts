@@ -5,6 +5,8 @@ declare global {
 		async get(id: number): Promise<T | undefined>;
 		async list(): Promise<T[]>;
 		async add(item: T): Promise<void>;
+		async update(item: T): Promise<void>;
+		async save(item: T): Promise<void>;
 	}
 
 	interface IMenuGateway extends IGateway<Menu> {}
