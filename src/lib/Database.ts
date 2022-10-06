@@ -1,3 +1,4 @@
+import e from "express";
 import Sqlite3 from "sqlite3";
 
 export type Row = {[key: string]: any} | undefined;
@@ -31,5 +32,16 @@ export default class Database {
 				}
 			});
 		});
+	}
+
+	run(query: string, ...params: any[]): Promise<void> {
+		return new Promise((resolve, reject) => {
+			this._dbInstance.run(query, params, function(error) {
+				if (error) {
+					reject(error);
+				}
+				resolve();
+			});
+		})
 	}
 }

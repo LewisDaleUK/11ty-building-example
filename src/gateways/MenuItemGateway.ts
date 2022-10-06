@@ -1,7 +1,7 @@
 import Database, { Row } from "../lib/Database";
 import MenuItem from "../models/MenuItem";
 
-export default class MenuItemGateway {
+export default class MenuItemGateway implements IMenuItemGateway {
 	private _database: Database;
 
 	constructor(database: Database) {
@@ -22,8 +22,17 @@ export default class MenuItemGateway {
 		);
 	}
 
-	async get_all_for_menu(menuId: number): Promise<Array<MenuItem>> {
+	async get_by_menu(menuId: number): Promise<MenuItem[]> {
 		const rows = await this._database.all("SELECT * FROM menu_items WHERE menu_id = ?", [menuId]);
+		return rows.map(row => this.row_to_menu_item(row) as MenuItem);
+	}
+
+	async add(item: MenuItem): Promise<void> {
+		
+	}
+
+	async list(): Promise<MenuItem[]> {
+		const rows = await this._database.all("SELECT * FROM menu_items");
 		return rows.map(row => this.row_to_menu_item(row) as MenuItem);
 	}
 }

@@ -3,11 +3,11 @@ import Menu from "../models/Menu";
 import MenuItem from "../models/MenuItem";
 import MenuItemGateway from "./MenuItemGateway";
 
-export default class MenuGateway {
+export default class MenuGateway implements IMenuGateway {
 	private _database: Database;
-	private _menuItemGateway: MenuItemGateway;
+	private _menuItemGateway: IMenuItemGateway;
 
-	constructor(database: Database, menuItemGateway: MenuItemGateway) {
+	constructor(database: Database, menuItemGateway: IMenuItemGateway) {
 		this._database = database;
 		this._menuItemGateway = menuItemGateway;
 	}
@@ -20,9 +20,9 @@ export default class MenuGateway {
 		return new Menu(row["id"], row["title"], row["description"], items);
 	}
 
-	async get_menu(id: number): Promise<Menu | undefined> {
+	async get(id: number): Promise<Menu | undefined> {
 		const row = await this._database.get("SELECT * FROM menus WHERE id=?", [id]);
-		const items = row ? await this._menuItemGateway.get_all_for_menu(id) : [];
+		const items = row ? await this._menuItemGateway.get_by_menu(id) : [];
 		return this.menu_from_row(row, items);
 	}
 
@@ -33,9 +33,13 @@ export default class MenuGateway {
 				async (row) =>
 					this.menu_from_row(
 						row,
-						row && row["id"] ? await this._menuItemGateway.get_all_for_menu(row["id"]) : []
+						row && row["id"] ? await this._menuItemGateway.get_by_menu(row["id"]) : []
 					) as Menu
 			)
 		);
+	}
+
+	async add(menu: Menu): Promise<void> {
+		await this._database.run("INSERT INTO menus (title, description) VALUES (?, ?)", menu.title, menu.description);
 	}
 }

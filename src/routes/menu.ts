@@ -1,4 +1,5 @@
 import express from "express";
+import Menu from "../models/Menu";
 
 const router = express.Router();
 
@@ -6,13 +7,17 @@ router.get('/', async (req, res) => {
 	const menuGateway = req.container.getMenuGateway();
 	const menus = await menuGateway.list();
 
-	res.send(menus);
+	res.render('menu/list.njk', { menus });
+});
+
+router.get('/new', async (req, res) => {
+	res.render('menu/new.njk');
 });
 
 router.get('/:menuId', async (req, res) => {
 	const menuGateway = req.container.getMenuGateway();
 	const id = parseInt(req.params["menuId"]);
-	const menu = await menuGateway.get_menu(id);
+	const menu = await menuGateway.get(id);
 	
 	if (menu) {
 		res.send(menu);
@@ -22,7 +27,14 @@ router.get('/:menuId', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-	
+	const menuGateway = req.container.getMenuGateway();
+	const menu = new Menu(
+		undefined,
+		req.body["title"],
+		req.body["description"]
+	);
+	menuGateway.add(menu);
+	res.redirect("/menu");
 });
 
 export default router;
