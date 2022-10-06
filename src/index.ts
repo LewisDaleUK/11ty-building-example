@@ -1,12 +1,13 @@
 import express from 'express';
 import container from './container';
 
-import menu from './controllers/MenuController';
+import menu from './routes/menu';
 
 const app = express();
 
 app.use((req, res, next) => {
 	req.container = container;
+	next();
 });
 
 app.get('/', (req, res) => {
