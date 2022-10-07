@@ -1,8 +1,11 @@
 import express from 'express';
 import nunjucks from 'nunjucks';
+import dotenv from 'dotenv';
 
 import container from './container';
 import menu from './routes/menu';
+
+dotenv.config();
 
 const app = express();
 

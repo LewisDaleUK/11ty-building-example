@@ -6,7 +6,6 @@ const router = express.Router();
 router.get('/', async (req, res) => {
 	const menuGateway = req.container.getMenuGateway();
 	const menus = await menuGateway.list();
-
 	res.render('menu/list.njk', { menus });
 });
 
@@ -36,6 +35,7 @@ router.post('/:menuId?', async (req, res) => {
 	);
 
 	await menuGateway.save(menu);
+	req.container.getBuilder().execute(await menuGateway.list()); // Don't wait for this to complete
 	res.redirect("/menu");
 });
 
