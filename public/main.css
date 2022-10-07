@@ -1,0 +1,75 @@
+:root {
+	--color-primary: #374151;
+	--color-secondary: #f8fafc;
+
+	--font-base: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--screen-md: 768px;
+
+	--text-line-1: 1;
+    --text-xs-line: 1rem;
+    --text-sm-line: 1.25rem;
+    --text-lg-line: 1.75rem;
+    --text-base-line: 1.75rem;
+    --text-xl-line: 1;
+    --text-2xl-line: 1;
+    --text-3xl-line: 1;
+    --text-4xl-line: 1;
+
+    --text-line-1: clamp(1.09rem, calc(1.04rem + 0.25vw), 1.64rem);
+    --text-xs: clamp(1.31rem, calc(1.23rem + 0.40vw), 2.19rem);
+    --text-sm: clamp(1.58rem, calc(1.45rem + 0.61vw), 2.92rem);
+    --text-base: clamp(1.89rem, calc(1.71rem + 0.91vw), 3.89rem);
+    --text-lg: clamp(2.27rem, calc(2.00rem + 1.32vw), 5.18rem);
+    --text-xl: clamp(2.72rem, calc(2.34rem + 1.90vw), 6.91rem);
+    --text-2xl: clamp(3.27rem, calc(2.73rem + 2.70vw), 9.21rem);
+    --text-3xl: clamp(3.92rem, calc(3.16rem + 3.80vw), 12.27rem);
+    --text-4xl: clamp(4.70rem, calc(3.64rem + 5.30vw), 16.36rem);
+    --text-5xl: clamp(5.64rem, calc(4.17rem + 7.35vw), 21.81rem);
+    --text-6xl: clamp(6.77rem, calc(4.75rem + 10.13vw), 29.07rem);
+    --text-7xl: clamp(8.13rem, calc(5.34rem + 13.92vw), 38.75rem);
+
+}
+
+body {
+	background: var(--color-secondary);
+	color: var(--color-primary);
+
+	font-family: var(--font-base);
+	font-size: var(--text-xs);
+}
+
+a {
+	display: inline-block;
+	padding: 0.5rem 1rem;
+	background: var(--color-primary);
+	color: var(--color-secondary);
+	text-decoration: none;
+}
+
+a:hover, a:focus {
+	text-decoration: underline;
+}
+
+h1 {
+	font-size: var(--text-2xl);
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	max-width: var(--screen-md);
+	width: 100%;
+}
+
+input, textarea {
+	padding: 0.2rem 0.5rem;
+	font-size: var(--text-xs);
+}
+
+form button {
+	display: inline-block;
+	padding: 0.5rem 1rem;
+	background: var(--color-primary);
+	color: var(--color-secondary);
+	width: fit-content;
+}

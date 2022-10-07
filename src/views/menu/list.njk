@@ -1,3 +1,6 @@
+{% extends "includes/_layout.njk" %}
+
+{% block content %}
 <ul>
 {% for menu in menus %}
 	<li>{{ menu.title }}</li>
@@ -5,3 +8,5 @@
 </ul>
 
 <a href="/menu/new">Add menu</a>
+{% endblock content %}
+ 

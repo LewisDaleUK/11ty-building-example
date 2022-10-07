@@ -13,7 +13,7 @@ nunjucks.configure('src/views', {
 	autoescape: true,
 	express: app
 });
-
+app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
