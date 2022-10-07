@@ -70,6 +70,7 @@ form button {
 	display: inline-block;
 	padding: 0.5rem 1rem;
 	background: var(--color-primary);
+	font-size: var(--text-base);
 	color: var(--color-secondary);
 	width: fit-content;
 }
